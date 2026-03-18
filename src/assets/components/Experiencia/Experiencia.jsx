@@ -38,7 +38,7 @@ const experiencias = [
 
 const Experiencia = () => {
   return (
-    <section id="habilidades" className="scroll-mt-24">
+    <section id="experiencia" className="scroll-mt-24">
       <CardContainer className="flex-col border border-slate-700/70 shadow-[0_8px_30px_rgba(2,6,23,0.45)]">
         <div className="flex items-center justify-between gap-3">
           <h2 className="text-xl font-bold text-blue-400">Experiencia</h2>

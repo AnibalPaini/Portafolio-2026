@@ -43,8 +43,20 @@ const SobreMi = () => {
         </div>
 
         <div className="flex items-center gap-2 mt-5 text-2xl">
-          <i class="devicon-github-original hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
-          <i class="devicon-linkedin-plain hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
+          <a
+            href="https://github.com/AnibalPaini"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="devicon-github-original hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
+          </a>
+          <a
+            href="https://www.linkedin.com/in/anibal-paini-0226152b6"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <i class="devicon-linkedin-plain hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
+          </a>
         </div>
       </div>
     </CardContainer>

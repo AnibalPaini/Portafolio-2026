@@ -5,6 +5,8 @@ import Tecnologias from "./assets/components/Tecnologias/Tecnologias";
 import Proyectos from "./assets/components/Proyectos/Proyectos";
 import Experiencia from "./assets/components/Experiencia/Experiencia";
 import Educacion from "./assets/components/Educacion/Educacion";
+import Contacto from "./assets/components/Contacto/Contacto";
+import Footer from "./assets/components/Footer/Footer";
 
 const App = () => {
   return (
@@ -30,6 +32,12 @@ const App = () => {
       <section className="max-w-7xl mx-auto px-4 pb-10 text-white">
         <Educacion />
       </section>
+
+      <section className="max-w-7xl mx-auto px-4 pb-10 text-white">
+        <Contacto />
+      </section>
+
+      <Footer />
     </div>
   );
 };
