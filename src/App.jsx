@@ -4,6 +4,7 @@ import SobreMi from "./assets/components/SobreMi/SobreMi";
 import Tecnologias from "./assets/components/Tecnologias/Tecnologias";
 import Proyectos from "./assets/components/Proyectos/Proyectos";
 import Experiencia from "./assets/components/Experiencia/Experiencia";
+import Educacion from "./assets/components/Educacion/Educacion";
 
 const App = () => {
   return (
@@ -24,6 +25,10 @@ const App = () => {
 
       <section className="max-w-7xl mx-auto px-4 pb-10 text-white">
         <Experiencia />
+      </section>
+
+      <section className="max-w-7xl mx-auto px-4 pb-10 text-white">
+        <Educacion />
       </section>
     </div>
   );
