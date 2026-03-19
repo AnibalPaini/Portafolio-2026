@@ -154,7 +154,11 @@ const listadoProyectos = [
     tecnologias: ["React"],
     descripcion:
       "Página web para la Municipalidad de Santa Rosa en conmemoración del 24 de marzo, Día de la Memoria, donde se publican testimonios de personas. Es responsive y se adaptó al manual de marca del municipio.",
-    imagenes: ["/proyectos/Memoria-de-una-foto (1).png", "/proyectos/Memoria-de-una-foto (2).png", "/proyectos/Memoria-de-una-foto (3).png"],
+    imagenes: [
+      "/proyectos/Memoria-de-una-foto (1).png",
+      "/proyectos/Memoria-de-una-foto (2).png",
+      "/proyectos/Memoria-de-una-foto (3).png",
+    ],
     gitUrl: null,
     gitEstado: "No disponible",
     webUrl: "https://memoriadeunafoto.santarosa.gob.ar/",
