@@ -47,15 +47,17 @@ const SobreMi = () => {
             href="https://github.com/AnibalPaini"
             target="_blank"
             rel="noreferrer"
+            className="hover:scale-105 transition-transform duration-200 cursor-pointer"
           >
-            <i class="devicon-github-original hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
+            <i className="devicon-github-original"></i>
           </a>
           <a
             href="https://www.linkedin.com/in/anibal-paini-0226152b6"
             target="_blank"
             rel="noreferrer"
+            className="hover:scale-105 transition-transform duration-200 cursor-pointer"
           >
-            <i class="devicon-linkedin-plain hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
+            <i className="devicon-linkedin-plain hover:scale-105 transition-transform duration-200 cursor-pointer"></i>
           </a>
         </div>
       </div>

@@ -1,4 +1,6 @@
 import CardContainer from "../UI/CardContainer";
+import { motion } from "motion/react";
+import { useState } from "react";
 
 const technologies = [
   {
@@ -61,12 +63,17 @@ const technologies = [
 ];
 
 const Tecnologias = () => {
+  const [rotations] = useState(() =>
+    Array.from({ length: 16 }, () => Math.floor(Math.random() * 30) - 15),
+  );
   return (
     <CardContainer className="h-full flex-col border border-slate-700/70 shadow-[0_8px_30px_rgba(2,6,23,0.45)]">
       <h2 className="text-xl font-bold text-blue-400">Tecnologías</h2>
       <div className="grid auto-rows-fr grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-        {technologies.map((tech) => (
-          <article
+        {technologies.map((tech, index) => (
+          <motion.article
+            whileHover={{ rotate: rotations[index] }}
+            transition={{ duration: 0.2 }}
             key={tech.name}
             className="flex min-h-20 flex-col items-center justify-center gap-2 rounded-lg border border-slate-600/35 bg-slate-700/45 px-2 py-3 text-center transition-transform duration-200 hover:-translate-y-0.5"
           >
@@ -83,7 +90,7 @@ const Tecnologias = () => {
             <span className="text-xs font-semibold tracking-wide text-slate-200">
               {tech.label}
             </span>
-          </article>
+          </motion.article>
         ))}
       </div>
     </CardContainer>

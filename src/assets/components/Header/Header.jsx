@@ -8,19 +8,44 @@ const Header = () => {
         <nav>
           <ul className="flex gap-5 text-white">
             <li>
-              <a href="#sobre-mi">Inicio</a>
+              <a
+                href="#sobre-mi"
+                className="hover:text-blue-400 transition-colors duration-200"
+              >
+                Inicio
+              </a>
             </li>
             <li>
-              <a href="#proyectos">Proyectos</a>
+              <a
+                href="#proyectos"
+                className="hover:text-blue-400 transition-colors duration-200"
+              >
+                Proyectos
+              </a>
             </li>
             <li>
-              <a href="#experiencia">Experiencia</a>
+              <a
+                href="#experiencia"
+                className="hover:text-blue-400 transition-colors duration-200"
+              >
+                Experiencia
+              </a>
             </li>
             <li>
-              <a href="#educacion">Educación</a>
+              <a
+                href="#educacion"
+                className="hover:text-blue-400 transition-colors duration-200"
+              >
+                Educación
+              </a>
             </li>
             <li>
-              <a href="#contacto">Contacto</a>
+              <a
+                href="#contacto"
+                className="hover:text-blue-400 transition-colors duration-200"
+              >
+                Contacto
+              </a>
             </li>
           </ul>
         </nav>
