@@ -16,16 +16,15 @@ const listadoProyectos = [
     descripcion:
       "Aplicación web SaaS orientada a complejos deportivos para gestionar canchas, reservas y pagos. También permite a clientes reservar de manera simple e incluye envío de correos para recordar turnos.",
     imagenes: [
-      "/proyectos/canchasya.png",
-      "/proyectos/canchasya (2).png",
-      "/proyectos/canchasya (3).png",
-      "/proyectos/canchasya (4).png",
-      "/proyectos/canchasya (5).png",
-      "/proyectos/canchasya (6).png",
-      "/proyectos/canchasya (7).png",
-      "/proyectos/canchasya (8).png",
-      "/proyectos/canchasya (9).png",
-      "/proyectos/canchasya (10).png",
+      "/proyectos/CanchasYa.png",
+      "/proyectos/CanchasYa (2).png",
+      "/proyectos/CanchasYa (3).png",
+      "/proyectos/CanchasYa (4).png",
+      "/proyectos/CanchasYa (5).png",
+      "/proyectos/CanchasYa (6).png",
+      "/proyectos/CanchasYa (7).png",
+      "/proyectos/CanchasYa (8).png",
+      "/proyectos/CanchasYa (9).png",
     ],
     gitUrl: null,
     gitEstado: "Privado",
@@ -92,12 +91,11 @@ const listadoProyectos = [
       "/proyectos/PodaWeb2.jpeg",
       "/proyectos/PodaWeb3.jpeg",
       "/proyectos/PodaWeb4.jpeg",
-      "/proyectos/PodaWeb5.jpeg",
-      "/proyectos/PodaWeb6.jpeg",
-      "/proyectos/PodaWeb7.jpeg",
+      "/proyectos/PodaWeb5.png",
+      "/proyectos/PodaWeb7.png",
       "/proyectos/PodaWeb8.jpeg",
       "/proyectos/PodaWeb9.jpeg",
-      "/proyectos/PodaWeb10.jpeg",
+      "/proyectos/PodaWeb10.png",
     ],
     gitUrl: "https://github.com/AnibalPaini/PODA-WEB-public",
     webUrl: null,
@@ -118,7 +116,7 @@ const listadoProyectos = [
     descripcion:
       "Desde backend se generan viajes de localidades pampeanas con fechas y tipo de formulario. Luego, las personas completan el formulario al finalizar y los datos se analizan con gráficos y filtros.",
     imagenes: [
-      "/proyectos/Conoce-tu-capital1.png",
+      "/proyectos/Conoce-tu-capital.png",
       "/proyectos/Conoce-tu-capital (2).png",
       "/proyectos/Conoce-tu-capital (3).png",
       "/proyectos/Conoce-tu-capital (4).png",
@@ -155,13 +153,56 @@ const listadoProyectos = [
     descripcion:
       "Página web para la Municipalidad de Santa Rosa en conmemoración del 24 de marzo, Día de la Memoria, donde se publican testimonios de personas. Es responsive y se adaptó al manual de marca del municipio.",
     imagenes: [
-      "/proyectos/Memoria-de-una-foto (1).png",
+      "/proyectos/Memoria-de-una-foto.png",
       "/proyectos/Memoria-de-una-foto (2).png",
       "/proyectos/Memoria-de-una-foto (3).png",
     ],
     gitUrl: null,
     gitEstado: "No disponible",
     webUrl: "https://memoriadeunafoto.santarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Fichero-MSR",
+    tecnologias: [
+      "React Native",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "TypeScript",
+      "Claude Code",
+    ],
+    descripcion:
+      "Sistema mobile de para la Municipalidad de Santa Rosa que permite a los encargados fichar la entrada y salida de empleados. Se desarrolló con ayuda de IA.",
+    imagenes: [],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: null,
+    estado: null,
+  },
+  {
+    nombre: "Overtime",
+    tecnologias: [
+      "React Native",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "GitHub Copilot",
+      "IA",
+    ],
+    descripcion:
+      "Sistema mobile desarrolladó para uso propio que permite registrar horas extras de trabajo, con una interfaz moderna e intuitiva, el usuario carga cuantas horas tiene disponible para trabajar, las hs maximas y minimas por día, y el sistema te calcula un plan para completar la cantidad de horas que indicaste, y el usuario en el calendario va cargando las hs que hizo por día, llevando el registro y calculo de horas hechas, ademas el usuario puede cargar el valor de la hora extra y el valor en fin de semanas o feriados. Se desarrolló con ayuda de IA y GitHub Copilot para acelerar el proceso de desarrollo.",
+    imagenes: [
+      "/proyectos/overtime.jpeg",
+      "/proyectos/overtime1.jpeg",
+      "/proyectos/overtime2.jpeg",
+      "/proyectos/overtime3.jpeg",
+      "/proyectos/overtime4.jpeg",
+      "/proyectos/overtime5.jpeg",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: null,
     estado: null,
   },
 ];
@@ -267,8 +308,24 @@ const LinkIcon = () => (
 
 const Proyectos = () => {
   const [modalProyecto, setModalProyecto] = useState(null);
+  const [imagenActual, setImagenActual] = useState(0);
 
-  const cerrarModal = () => setModalProyecto(null);
+  const cerrarModal = () => {
+    setModalProyecto(null);
+    setImagenActual(0);
+  };
+
+  const siguienteImagen = () => {
+    if (modalProyecto && imagenActual < modalProyecto.imagenes.length - 1) {
+      setImagenActual(imagenActual + 1);
+    }
+  };
+
+  const imagenAnterior = () => {
+    if (imagenActual > 0) {
+      setImagenActual(imagenActual - 1);
+    }
+  };
 
   return (
     <section id="proyectos">
@@ -377,11 +434,73 @@ const Proyectos = () => {
 
             <div className="mt-4 flex min-h-72 items-center justify-center rounded-lg border border-dashed border-slate-600/70 bg-slate-800/70 p-4">
               {modalProyecto.imagenes.length > 0 ? (
-                <img
-                  src={modalProyecto.imagenes[0]}
-                  alt={`Captura de ${modalProyecto.nombre}`}
-                  className="max-h-[70vh] w-full rounded-md object-contain"
-                />
+                <div className="relative w-full">
+                  <img
+                    src={modalProyecto.imagenes[imagenActual]}
+                    alt={`Captura ${imagenActual + 1} de ${modalProyecto.nombre}`}
+                    className="max-h-[70vh] w-full rounded-md object-contain"
+                  />
+
+                  {modalProyecto.imagenes.length > 1 && (
+                    <>
+                      <button
+                        type="button"
+                        onClick={imagenAnterior}
+                        disabled={imagenActual === 0}
+                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-slate-500/60 bg-slate-700/60 p-2 text-slate-100 transition-all hover:border-cyan-300/90 hover:text-cyan-200 disabled:cursor-not-allowed disabled:border-slate-700/70 disabled:bg-slate-800/70 disabled:text-slate-500"
+                      >
+                        <svg
+                          className="h-5 w-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={siguienteImagen}
+                        disabled={
+                          imagenActual === modalProyecto.imagenes.length - 1
+                        }
+                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-slate-500/60 bg-slate-700/60 p-2 text-slate-100 transition-all hover:border-cyan-300/90 hover:text-cyan-200 disabled:cursor-not-allowed disabled:border-slate-700/70 disabled:bg-slate-800/70 disabled:text-slate-500"
+                      >
+                        <svg
+                          className="h-5 w-5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                        >
+                          <path d="M9 19l7-7-7-7" />
+                        </svg>
+                      </button>
+
+                      <div className="mt-3 flex items-center justify-center gap-2">
+                        {modalProyecto.imagenes.map((_, index) => (
+                          <button
+                            key={index}
+                            type="button"
+                            onClick={() => setImagenActual(index)}
+                            className={`h-2 rounded-full transition-all ${
+                              index === imagenActual
+                                ? "w-6 bg-cyan-400"
+                                : "w-2 bg-slate-500/60 hover:bg-slate-400"
+                            }`}
+                            aria-label={`Ir a imagen ${index + 1}`}
+                          />
+                        ))}
+                      </div>
+
+                      <p className="mt-3 text-center text-xs text-slate-400">
+                        {imagenActual + 1} de {modalProyecto.imagenes.length}
+                      </p>
+                    </>
+                  )}
+                </div>
               ) : (
                 <p className="max-w-md text-center text-sm text-slate-300">
                   Este proyecto aún no tiene imágenes cargadas. Completa el
