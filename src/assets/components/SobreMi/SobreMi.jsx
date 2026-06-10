@@ -7,7 +7,7 @@ const SobreMi = () => {
         <div className="flex items-center gap-3 md:block md:shrink-0">
           <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-blue-400">
             <img
-              src="/IMG.png"
+              src="/IMG.webp"
               alt="Foto de Anibal Paini"
               className="h-full w-full object-cover"
             />
