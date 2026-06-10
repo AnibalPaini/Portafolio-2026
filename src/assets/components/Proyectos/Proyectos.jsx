@@ -95,9 +95,9 @@ const listadoProyectos = [
       "/proyectos/PodaWeb6.webp",
       "/proyectos/PodaWeb7.webp",
     ],
-    gitUrl: "https://github.com/AnibalPaini/PODA-WEB-public",
-    webUrl: null,
-    webEstado: "No disponible",
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://podaresponsable.santarosa.gob.ar",
     estado: null,
   },
 
