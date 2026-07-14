@@ -28,9 +28,8 @@ const listadoProyectos = [
     ],
     gitUrl: null,
     gitEstado: "Privado",
-    webUrl: null,
-    webEstado: "Privada",
-    estado: "Próximamente disponible",
+    webUrl: "https://canchasya.ar",
+    estado: null,
   },
   {
     nombre: "PingStatus",
