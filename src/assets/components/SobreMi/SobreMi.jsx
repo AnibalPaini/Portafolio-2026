@@ -22,29 +22,24 @@ const SobreMi = () => {
           </h2>
           <div className="mt-3 rounded-md bg-gray-700 p-4 text-base leading-relaxed text-gray-200">
             <p>
-              Soy Técnico Superior en Desarrollo de Software, especializado en
-              el desarrollo de aplicaciones web utilizando tecnologías del stack
-              MERN (MongoDB, Express, React y Node.js).
+              Soy Técnico Superior en Desarrollo de Software y cuento con 2 años
+              de experiencia en desarrollo full stack, utilizando tecnologías
+              como Node, React, Mongo, SQL y Express.
             </p>
 
-            <p className="mt-1">
-              Me enfoco en crear soluciones completas y funcionales, abarcando
-              tanto la lógica del backend como la experiencia del usuario en el
-              frontend. He desarrollado proyectos como sistemas de reservas,
-              paneles administrativos y aplicaciones con integración de APIs y
-              bases de datos.
+            <p className="mt-2">
+              Me ocupo tanto del backend como de la parte que ve el usuario.
+              Trabajé en portales institucionales, sistemas de reservas, paneles
+              de administración y aplicaciones que se integran con APIs y bases
+              de datos.
             </p>
 
-            {/* <p className="mt-1">
-            Disfruto resolver problemas reales a través del código, priorizando
-            la usabilidad, el rendimiento y la escalabilidad de las
-            aplicaciones.
-          </p> */}
-
-            <p className="mt-1">
-              Actualmente continúo formándome en desarrollo web moderno,
-              construyendo proyectos propios y buscando nuevas oportunidades
-              para crecer profesionalmente.
+            <p className="mt-2">
+              Hoy trabajo en la Municipalidad de Santa Rosa, donde llevo
+              adelante varios de los sitios y sistemas que usan los vecinos y
+              las áreas internas. En paralelo sigo con proyectos propios y ahora
+              estoy haciendo dos cursos, uno de redes informáticas y otro de
+              PostgreSQL.
             </p>
           </div>
 

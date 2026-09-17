@@ -1,7 +1,217 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CardContainer from "../UI/CardContainer";
 
-const listadoProyectos = [
+const proyectosMunicipales = [
+  {
+    nombre: "Santa Rosa - Sitio Oficial",
+    rol: "Desarrollador principal",
+    tecnologias: ["Astro", "React", "Node.js", "Express", "JWT"],
+    descripcion:
+      "Participé en la migración del sitio municipal, que estaba hecho en WordPress, a Astro. Armé el backend para la carga de noticias, alertas (cortes de calle, emergencias, cambios en las líneas de colectivo) y documentación. También integré el sistema de reclamos SGM y el pago de impuestos municipales. Hoy sigo a cargo del sitio como desarrollador principal.",
+    imagenes: [
+      "/proyectos/santarosa/SantaRosa-inicio.webp",
+      "/proyectos/santarosa/SantaRosa-noticias.webp",
+      "/proyectos/santarosa/SantaRosa-servicios.webp",
+      "/proyectos/santarosa/SantaRosa-programas.webp",
+      "/proyectos/santarosa/SantaRosa-informacion-util.webp",
+      "/proyectos/santarosa/SantaRosa-portal-de-tasas.webp",
+      "/proyectos/santarosa/SantaRosa-reclamos.webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://www.santarosa.gob.ar/",
+    estado: "En desarrollo activo",
+  },
+  {
+    nombre: "Poda Responsable",
+    rol: "Desarrollador",
+    tecnologias: ["React", "Node.js", "Express", "PostgreSQL", "JWT"],
+    descripcion:
+      "Sistema de solicitudes de poda: los vecinos cargan su pedido y eligen un podador habilitado por la Municipalidad de Santa Rosa. El técnico a cargo revisa cada solicitud y la aprueba o la rechaza.",
+    imagenes: [
+      "/proyectos/PodaWeb1.webp",
+      "/proyectos/PodaWeb2.webp",
+      "/proyectos/PodaWeb3.webp",
+      "/proyectos/PodaWeb4.webp",
+      "/proyectos/PodaWeb5.webp",
+      "/proyectos/PodaWeb6.webp",
+      "/proyectos/PodaWeb7.webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://podaresponsable.santarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Empleos",
+    rol: "Desarrollador",
+    tecnologias: ["React", "Node.js", "Express", "MySQL", "JWT"],
+    descripcion:
+      "Portal donde los vecinos ven las búsquedas abiertas y se postulan subiendo su CV. Para enviar el formulario tienen que crear una cuenta y verificar el correo con un código. Desde el panel de administración se arman los formularios y se revisan las postulaciones recibidas.",
+    metrica: "Más de 2000 CVs en las primeras 48 horas",
+    imagenes: [
+      "/proyectos/empleos/Empleos-inicio.webp",
+      "/proyectos/empleos/Empleos-pasos.webp",
+      "/proyectos/empleos/Empleos-formulario.webp",
+      "/proyectos/empleos/Empleos-formulario-cv.webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://empleos.santarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Concejo Deliberante",
+    rol: "Desarrollador",
+    tecnologias: ["React", "Node.js", "Express", "MySQL", "JWT"],
+    descripcion:
+      "Pasé la web del Concejo Deliberante de WordPress a React, con una interfaz más actual y estilos acordes a la institución. Desde el sitio se consultan las sesiones con su temario y acta, el buscador de normativas, los expedientes y las comisiones. Sumé un panel de administración para que los encargados carguen la información sin depender de un desarrollador.",
+    imagenes: [
+      "/proyectos/concejo/Concejo-inicio.webp",
+      "/proyectos/concejo/Concejo-sesiones-prensa.webp",
+      "/proyectos/concejo/Concejo-comisiones.webp",
+      "/proyectos/concejo/Concejo-sesiones.webp",
+      "/proyectos/concejo/Concejo-normativas.webp",
+      "/proyectos/concejo/Concejo-expedientes.webp",
+      "/proyectos/concejo/Concejo-expedientes-detalle.webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://concejosantarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Deportes",
+    rol: "Desarrollador",
+    tecnologias: ["React", "Node.js", "Express", "MySQL", "JWT", "Leaflet"],
+    descripcion:
+      "Sección dentro del sitio municipal para que la Dirección de Deportes publique sus noticias, deportistas y ligas. En el backend se cargan deportes, sedes, ligas y categorías, y el fixture se genera solo: liga, eliminación directa o una combinación de las dos. La oferta deportiva se filtra por tipo de actividad y edad, y las sedes se ubican en un mapa.",
+    imagenes: [
+      "/proyectos/deporte/Deportes-inicio.webp",
+      "/proyectos/deporte/Deportes-oferta.webp",
+      "/proyectos/deporte/Deportes-sedes.webp",
+      "/proyectos/deporte/Deportes-ligas.webp",
+      "/proyectos/deporte/Deportes-posiciones.webp",
+      "/proyectos/deporte/Deportes-fixture.webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://www.santarosa.gob.ar/deportes/",
+    estado: null,
+  },
+  {
+    nombre: "BoletoWeb",
+    rol: "Desarrollador",
+    tecnologias: ["React", "Node.js", "Express", "CSS"],
+    descripcion:
+      "Rediseño de la consulta de deuda del boleto, con una interfaz más clara y amigable que la original. El backend parsea los datos que devuelve el sistema anterior y los muestra ya ordenados.",
+    imagenes: [
+      "/proyectos/BoletoWeb.webp",
+      "/proyectos/BoletoWeb (2).webp",
+      "/proyectos/BoletoWeb (3).webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://consultadeuda.santarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Conoce Tu Capital",
+    rol: "Desarrollador",
+    tecnologias: ["React", "Node.js", "Express", "MongoDB", "JWT"],
+    descripcion:
+      "Formularios para la Dirección de Turismo. Desde el panel se generan según la localidad de origen del visitante y las fechas del viaje. Los datos que se cargan después se usan para armar estadísticas, con gráficos y filtros.",
+    imagenes: [
+      "/proyectos/Conoce-tu-capital.webp",
+      "/proyectos/Conoce-tu-capital (2).webp",
+      "/proyectos/Conoce-tu-capital (3).webp",
+      "/proyectos/Conoce-tu-capital (4).webp",
+      "/proyectos/Conoce-tu-capital (5).webp",
+      "/proyectos/Conoce-tu-capital (6).webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://conocetucapital.santarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Memoria de una foto",
+    rol: "Desarrollador",
+    tecnologias: ["React"],
+    descripcion:
+      "Sitio por el 24 de marzo, Día de la Memoria, donde se publican testimonios de vecinos junto a sus fotos. Es responsive y está ajustado al manual de marca del municipio.",
+    imagenes: [
+      "/proyectos/Memoria-de-una-foto.webp",
+      "/proyectos/Memoria-de-una-foto (2).webp",
+      "/proyectos/Memoria-de-una-foto (3).webp",
+    ],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: "https://memoriadeunafoto.santarosa.gob.ar/",
+    estado: null,
+  },
+  {
+    nombre: "Centro de Abastecimiento",
+    rol: "Desarrollador",
+    tecnologias: ["Node.js", "Express", "MySQL"],
+    descripcion:
+      "Aplicación que estaba hecha en C# con SQL Server y se migró a Node.js con MySQL. Se usa para llevar los registros de las estaciones de abastecimiento.",
+    imagenes: [],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: null,
+    webEstado: "Sistema interno",
+    estado: null,
+  },
+  {
+    nombre: "Fichadas EMTU",
+    rol: "Colaboración",
+    tecnologias: [],
+    descripcion:
+      "Participé en un sistema de RRHH para llevar legajos, fichadas y licencias. Se conecta directo a los relojes fichadores, descarga las marcas y las compara con el horario cargado de cada empleado para determinar la asistencia.",
+    imagenes: [],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: null,
+    webEstado: "Sistema interno",
+    estado: null,
+  },
+  {
+    nombre: "Tránsito",
+    rol: "Colaboración",
+    tecnologias: ["PHP"],
+    descripcion:
+      "Colaboré en un sistema para gestionar actas de infracciones de tránsito. El anterior estaba hecho en Fox y se pasó a PHP.",
+    imagenes: [],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: null,
+    webEstado: "Sistema interno",
+    estado: null,
+  },
+  {
+    nombre: "Fichero-MSR",
+    rol: "Desarrollador",
+    tecnologias: [
+      "React Native",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "TypeScript",
+      "Claude Code",
+    ],
+    descripcion:
+      "App mobile para que los encargados registren la entrada y la salida del personal. La desarrollé apoyándome en IA.",
+    imagenes: [],
+    gitUrl: null,
+    gitEstado: "No disponible",
+    webUrl: null,
+    webEstado: "App interna",
+    estado: null,
+  },
+];
+
+const proyectosPersonales = [
   {
     nombre: "CanchasYa",
     tecnologias: [
@@ -14,7 +224,7 @@ const listadoProyectos = [
       "Mercado Pago",
     ],
     descripcion:
-      "Aplicación web SaaS orientada a complejos deportivos para gestionar canchas, reservas y pagos. También permite a clientes reservar de manera simple e incluye envío de correos para recordar turnos.",
+      "Aplicación SaaS para complejos deportivos. Permite administrar canchas, turnos y pagos, y que los clientes reserven de forma simple desde el celular. Manda correos automáticos para recordar los turnos.",
     imagenes: [
       "/proyectos/CanchasYa.webp",
       "/proyectos/CanchasYa (2).webp",
@@ -43,7 +253,7 @@ const listadoProyectos = [
       "Socket.io",
     ],
     descripcion:
-      "Aplicación para monitorear con pings componentes de red o sistemas web, con alertas de Telegram cuando cambia el estado de un dispositivo. En host gratuito solo se visualiza la parte de interfaz y funciones básicas.",
+      "Monitorea por ping equipos de red o sistemas web y avisa por Telegram cuando alguno cambia de estado. En el hosting gratuito solo se ve la interfaz y las funciones básicas.",
     imagenes: [
       "/proyectos/PingStatus.webp",
       "/proyectos/PingStatus2.webp",
@@ -59,70 +269,28 @@ const listadoProyectos = [
     estado: null,
   },
   {
-    nombre: "BoletoWeb",
-    tecnologias: ["React", "Node.js", "Express", "CSS"],
-    descripcion:
-      "Rediseño de la página original de BoletoWeb con una interfaz más moderna y amigable. Desde backend se parsean los datos recibidos desde la página original.",
-    imagenes: [
-      "/proyectos/BoletoWeb.webp",
-      "/proyectos/BoletoWeb (2).webp",
-      "/proyectos/BoletoWeb (3).webp",
-    ],
-    gitUrl: null,
-    gitEstado: "No disponible",
-    webUrl: "https://consultadeuda.santarosa.gob.ar/",
-    estado: null,
-  },
-  {
-    nombre: "PodaWeb",
+    nombre: "Overtime",
     tecnologias: [
-      "React",
+      "React Native",
       "Node.js",
       "Express",
-      "Tailwind CSS",
       "MongoDB",
-      "JWT",
+      "GitHub Copilot",
+      "IA",
     ],
     descripcion:
-      "Aplicación para la Municipalidad de Santa Rosa donde vecinos solicitan poda de árboles y los inspectores analizan cada solicitud para aprobarla o rechazarla. Incluye notificaciones por email con Nodemailer.",
+      "App mobile que hice para uso propio, para llevar el registro de horas extras. El usuario carga cuántas horas quiere hacer y el máximo y el mínimo por día, y la app arma un plan para llegar a esa cantidad. Después va anotando en el calendario lo que hizo y ve el total acumulado, con un valor distinto para fines de semana y feriados.",
     imagenes: [
-      "/proyectos/PodaWeb1.webp",
-      "/proyectos/PodaWeb2.webp",
-      "/proyectos/PodaWeb3.webp",
-      "/proyectos/PodaWeb4.webp",
-      "/proyectos/PodaWeb5.webp",
-      "/proyectos/PodaWeb6.webp",
-      "/proyectos/PodaWeb7.webp",
+      "/proyectos/overtime.webp",
+      "/proyectos/overtime1.webp",
+      "/proyectos/overtime2.webp",
+      "/proyectos/overtime3.webp",
+      "/proyectos/overtime4.webp",
+      "/proyectos/overtime5.webp",
     ],
     gitUrl: null,
     gitEstado: "No disponible",
-    webUrl: "https://podaresponsable.santarosa.gob.ar",
-    estado: null,
-  },
-
-  {
-    nombre: "Conoce Tu Capital",
-    tecnologias: [
-      "React",
-      "Node.js",
-      "Express",
-      "Tailwind CSS",
-      "MongoDB",
-      "JWT",
-    ],
-    descripcion:
-      "Desde backend se generan viajes de localidades pampeanas con fechas y tipo de formulario. Luego, las personas completan el formulario al finalizar y los datos se analizan con gráficos y filtros.",
-    imagenes: [
-      "/proyectos/Conoce-tu-capital.webp",
-      "/proyectos/Conoce-tu-capital (2).webp",
-      "/proyectos/Conoce-tu-capital (3).webp",
-      "/proyectos/Conoce-tu-capital (4).webp",
-      "/proyectos/Conoce-tu-capital (5).webp",
-      "/proyectos/Conoce-tu-capital (6).webp",
-    ],
-    gitUrl: null,
-    gitEstado: "No disponible",
-    webUrl: "https://conocetucapital.santarosa.gob.ar/",
+    webUrl: null,
     estado: null,
   },
   {
@@ -136,7 +304,7 @@ const listadoProyectos = [
       "TypeScript",
     ],
     descripcion:
-      "E-commerce para una hamburguesería desarrollado para profundizar TypeScript. Incluye órdenes con retiro o envío, pagos por transferencia, Mercado Pago o efectivo y panel admin con dashboard y CRUDs de productos, promociones y usuarios.",
+      "E-commerce para una hamburguesería que arranqué para meterme más a fondo con TypeScript. Tiene pedidos con retiro o envío, pago por transferencia, Mercado Pago o efectivo, y un panel de administración con dashboard y ABM de productos, promociones y usuarios.",
     imagenes: [],
     gitUrl: null,
     gitEstado: "No disponible",
@@ -144,63 +312,24 @@ const listadoProyectos = [
     webEstado: "No disponible",
     estado: "Actualmente en desarrollo",
   },
+];
+
+const grupos = [
   {
-    nombre: "Memoria de una foto",
-    tecnologias: ["React"],
-    descripcion:
-      "Página web para la Municipalidad de Santa Rosa en conmemoración del 24 de marzo, Día de la Memoria, donde se publican testimonios de personas. Es responsive y se adaptó al manual de marca del municipio.",
-    imagenes: [
-      "/proyectos/Memoria-de-una-foto.webp",
-      "/proyectos/Memoria-de-una-foto (2).webp",
-      "/proyectos/Memoria-de-una-foto (3).webp",
-    ],
-    gitUrl: null,
-    gitEstado: "No disponible",
-    webUrl: "https://memoriadeunafoto.santarosa.gob.ar/",
-    estado: null,
+    id: "municipal",
+    label: "Municipalidad de Santa Rosa",
+    labelCorto: "Municipalidad",
+    resumen:
+      "Sitios y sistemas que desarrollé en mi trabajo para la Municipalidad de Santa Rosa, La Pampa.",
+    proyectos: proyectosMunicipales,
   },
   {
-    nombre: "Fichero-MSR",
-    tecnologias: [
-      "React Native",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "TypeScript",
-      "Claude Code",
-    ],
-    descripcion:
-      "Sistema mobile de para la Municipalidad de Santa Rosa que permite a los encargados fichar la entrada y salida de empleados. Se desarrolló con ayuda de IA.",
-    imagenes: [],
-    gitUrl: null,
-    gitEstado: "No disponible",
-    webUrl: null,
-    estado: null,
-  },
-  {
-    nombre: "Overtime",
-    tecnologias: [
-      "React Native",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "GitHub Copilot",
-      "IA",
-    ],
-    descripcion:
-      "Sistema mobile desarrolladó para uso propio que permite registrar horas extras de trabajo, con una interfaz moderna e intuitiva, el usuario carga cuantas horas tiene disponible para trabajar, las hs maximas y minimas por día, y el sistema te calcula un plan para completar la cantidad de horas que indicaste, y el usuario en el calendario va cargando las hs que hizo por día, llevando el registro y calculo de horas hechas, ademas el usuario puede cargar el valor de la hora extra y el valor en fin de semanas o feriados. Se desarrolló con ayuda de IA y GitHub Copilot para acelerar el proceso de desarrollo.",
-    imagenes: [
-      "/proyectos/overtime.webp",
-      "/proyectos/overtime1.webp",
-      "/proyectos/overtime2.webp",
-      "/proyectos/overtime3.webp",
-      "/proyectos/overtime4.webp",
-      "/proyectos/overtime5.webp",
-    ],
-    gitUrl: null,
-    gitEstado: "No disponible",
-    webUrl: null,
-    estado: null,
+    id: "personal",
+    label: "Proyectos personales",
+    labelCorto: "Personales",
+    resumen:
+      "Proyectos propios y freelance, donde pruebo tecnologías nuevas y llevo las ideas de punta a punta.",
+    proyectos: proyectosPersonales,
   },
 ];
 
@@ -303,117 +432,252 @@ const LinkIcon = () => (
   </svg>
 );
 
+const iniciales = (nombre) =>
+  nombre
+    .replace(/[^\p{L}\p{N} ]/gu, " ")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((palabra) => palabra[0].toUpperCase())
+    .join("");
+
+const PreviewProyecto = ({ proyecto, onAbrir }) => {
+  const tieneImagenes = proyecto.imagenes.length > 0;
+
+  if (!tieneImagenes) {
+    return (
+      <div className="relative flex h-40 items-center justify-center overflow-hidden rounded-t-xl border-b border-slate-600/35 bg-linear-to-br from-slate-800 via-slate-800/60 to-slate-700/50">
+        <span className="text-3xl font-bold tracking-widest text-slate-500">
+          {iniciales(proyecto.nombre)}
+        </span>
+        <span className="absolute bottom-2 right-2 rounded-full border border-slate-600/70 bg-slate-900/80 px-2 py-0.5 text-[11px] text-slate-400">
+          Capturas próximamente
+        </span>
+      </div>
+    );
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onAbrir}
+      aria-label={`Ver imágenes de ${proyecto.nombre}`}
+      className="group/preview relative block h-40 w-full cursor-pointer overflow-hidden rounded-t-xl border-b border-slate-600/35 bg-slate-800"
+    >
+      <img
+        src={proyecto.imagenes[0]}
+        alt={`Vista previa de ${proyecto.nombre}`}
+        loading="lazy"
+        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover/preview:scale-105"
+      />
+      <span className="absolute inset-0 bg-linear-to-t from-slate-950/80 via-slate-950/10 to-transparent" />
+      <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full border border-cyan-300/40 bg-slate-900/85 px-2 py-0.5 text-[11px] font-medium text-cyan-100">
+        <ImageIcon />
+        {proyecto.imagenes.length}
+      </span>
+    </button>
+  );
+};
+
+const TarjetaProyecto = ({ proyecto, onVerImagenes }) => {
+  const estadoGit = proyecto.gitEstado ?? "No disponible";
+  const estadoWeb = proyecto.webEstado ?? "No disponible";
+  const tieneImagenes = proyecto.imagenes.length > 0;
+
+  return (
+    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-slate-600/35 bg-slate-700/40 transition-all duration-200 hover:-translate-y-1 hover:border-cyan-300/50 hover:shadow-[0_12px_30px_rgba(2,6,23,0.55)]">
+      <PreviewProyecto proyecto={proyecto} onAbrir={onVerImagenes} />
+
+      <div className="flex flex-1 flex-col p-4">
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-lg font-semibold text-slate-100">
+              {proyecto.nombre}
+            </h3>
+            {proyecto.rol && (
+              <p className="mt-0.5 text-xs font-medium uppercase tracking-wide text-cyan-200/80">
+                {proyecto.rol}
+              </p>
+            )}
+          </div>
+          {proyecto.estado && (
+            <span className="shrink-0 rounded-full border border-amber-300/40 bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-200">
+              {proyecto.estado}
+            </span>
+          )}
+        </div>
+
+        <p className="mt-3 text-sm leading-relaxed text-slate-200">
+          {proyecto.descripcion}
+        </p>
+
+        {proyecto.metrica && (
+          <p className="mt-3 inline-flex items-center gap-2 self-start rounded-md border border-emerald-400/30 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-100">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-300" />
+            {proyecto.metrica}
+          </p>
+        )}
+
+        {proyecto.tecnologias.length > 0 && (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {proyecto.tecnologias.map((tech) => (
+              <span
+                key={`${proyecto.nombre}-${tech}`}
+                className="rounded-full border border-cyan-400/35 bg-cyan-500/10 px-2.5 py-1 text-xs font-medium text-cyan-100"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
+
+        <div className="mt-auto flex items-center gap-2 pt-4">
+          <ActionButton
+            label={`Imágenes de ${proyecto.nombre}`}
+            onClick={tieneImagenes ? onVerImagenes : undefined}
+            disabled={!tieneImagenes}
+            title={
+              tieneImagenes ? "Ver imágenes" : "Aún sin imágenes cargadas"
+            }
+          >
+            <ImageIcon />
+          </ActionButton>
+
+          <ActionButton
+            label={`Repositorio de ${proyecto.nombre}`}
+            href={proyecto.gitUrl}
+            disabled={!proyecto.gitUrl}
+            title={proyecto.gitUrl ? "Abrir repositorio" : estadoGit}
+          >
+            <GitIcon />
+          </ActionButton>
+
+          <ActionButton
+            label={`Web de ${proyecto.nombre}`}
+            href={proyecto.webUrl}
+            disabled={!proyecto.webUrl}
+            title={proyecto.webUrl ? "Abrir sitio" : estadoWeb}
+          >
+            <LinkIcon />
+          </ActionButton>
+        </div>
+      </div>
+    </article>
+  );
+};
+
 const Proyectos = () => {
+  const [grupoActivo, setGrupoActivo] = useState(grupos[0].id);
   const [modalProyecto, setModalProyecto] = useState(null);
   const [imagenActual, setImagenActual] = useState(0);
 
-  const cerrarModal = () => {
+  const grupo = grupos.find((item) => item.id === grupoActivo) ?? grupos[0];
+
+  const cerrarModal = useCallback(() => {
     setModalProyecto(null);
+    setImagenActual(0);
+  }, []);
+
+  const siguienteImagen = useCallback(() => {
+    setImagenActual((actual) =>
+      modalProyecto && actual < modalProyecto.imagenes.length - 1
+        ? actual + 1
+        : actual
+    );
+  }, [modalProyecto]);
+
+  const imagenAnterior = useCallback(() => {
+    setImagenActual((actual) => (actual > 0 ? actual - 1 : actual));
+  }, []);
+
+  const abrirModal = (proyecto) => {
+    setModalProyecto(proyecto);
     setImagenActual(0);
   };
 
-  const siguienteImagen = () => {
-    if (modalProyecto && imagenActual < modalProyecto.imagenes.length - 1) {
-      setImagenActual(imagenActual + 1);
-    }
-  };
+  useEffect(() => {
+    if (!modalProyecto) return undefined;
 
-  const imagenAnterior = () => {
-    if (imagenActual > 0) {
-      setImagenActual(imagenActual - 1);
-    }
-  };
+    const manejarTeclado = (event) => {
+      if (event.key === "Escape") cerrarModal();
+      if (event.key === "ArrowRight") siguienteImagen();
+      if (event.key === "ArrowLeft") imagenAnterior();
+    };
+
+    document.addEventListener("keydown", manejarTeclado);
+    return () => document.removeEventListener("keydown", manejarTeclado);
+  }, [modalProyecto, cerrarModal, siguienteImagen, imagenAnterior]);
 
   return (
-    <section id="proyectos">
+    <section id="proyectos" className="scroll-mt-24">
       <CardContainer className="flex-col border border-slate-700/70 shadow-[0_8px_30px_rgba(2,6,23,0.45)]">
-        <div className="flex items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center justify-between gap-3">
           <h2 className="text-xl font-bold text-blue-400">Proyectos</h2>
           <span className="rounded-full border border-slate-600/80 bg-slate-700/60 px-3 py-1 text-xs text-slate-200">
-            {listadoProyectos.length} proyectos
+            {proyectosMunicipales.length + proyectosPersonales.length} proyectos
+            en total
           </span>
         </div>
 
-        <div className="mt-2 grid gap-4 md:grid-cols-2">
-          {listadoProyectos.map((proyecto) => {
-            const estadoGit = proyecto.gitEstado ?? "No disponible";
-            const estadoWeb = proyecto.webEstado ?? "No disponible";
-
+        <div
+          role="tablist"
+          aria-label="Categorías de proyectos"
+          className="mt-1 flex w-full flex-col gap-2 rounded-xl border border-slate-600/40 bg-slate-900/40 p-1.5 sm:w-auto sm:flex-row sm:self-start"
+        >
+          {grupos.map((item) => {
+            const activo = item.id === grupoActivo;
             return (
-              <article
-                key={proyecto.nombre}
-                className="flex h-full flex-col rounded-lg border border-slate-600/35 bg-slate-700/45 p-4"
+              <button
+                key={item.id}
+                type="button"
+                role="tab"
+                aria-selected={activo}
+                onClick={() => setGrupoActivo(item.id)}
+                className={`flex cursor-pointer items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                  activo
+                    ? "bg-blue-500/20 text-blue-100 shadow-[inset_0_0_0_1px_rgba(96,165,250,0.5)]"
+                    : "text-slate-300 hover:bg-slate-700/50 hover:text-slate-100"
+                }`}
               >
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="text-lg font-semibold text-slate-100">
-                    {proyecto.nombre}
-                  </h3>
-                  {proyecto.estado && (
-                    <span className="rounded-full border border-amber-300/40 bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-200">
-                      {proyecto.estado}
-                    </span>
-                  )}
-                </div>
-
-                <p className="mt-3 text-sm leading-relaxed text-slate-200">
-                  {proyecto.descripcion}
-                </p>
-
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {proyecto.tecnologias.map((tech) => (
-                    <span
-                      key={`${proyecto.nombre}-${tech}`}
-                      className="rounded-full border border-cyan-400/35 bg-cyan-500/10 px-2.5 py-1 text-xs font-medium text-cyan-100"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-4 flex items-center gap-2 pt-2">
-                  <ActionButton
-                    label={`Imágenes de ${proyecto.nombre}`}
-                    onClick={() => setModalProyecto(proyecto)}
-                    title={
-                      proyecto.imagenes.length > 0
-                        ? "Ver imágenes"
-                        : "Aún sin imágenes cargadas"
-                    }
-                  >
-                    <ImageIcon />
-                  </ActionButton>
-
-                  <ActionButton
-                    label={`Repositorio de ${proyecto.nombre}`}
-                    href={proyecto.gitUrl}
-                    disabled={!proyecto.gitUrl}
-                    title={proyecto.gitUrl ? "Abrir repositorio" : estadoGit}
-                  >
-                    <GitIcon />
-                  </ActionButton>
-
-                  <ActionButton
-                    label={`Web de ${proyecto.nombre}`}
-                    href={proyecto.webUrl}
-                    disabled={!proyecto.webUrl}
-                    title={proyecto.webUrl ? "Abrir sitio" : estadoWeb}
-                  >
-                    <LinkIcon />
-                  </ActionButton>
-                </div>
-              </article>
+                <span className="hidden sm:inline">{item.label}</span>
+                <span className="sm:hidden">{item.labelCorto}</span>
+                <span
+                  className={`rounded-full px-2 py-0.5 text-xs ${
+                    activo
+                      ? "bg-blue-400/25 text-blue-100"
+                      : "bg-slate-700/70 text-slate-300"
+                  }`}
+                >
+                  {item.proyectos.length}
+                </span>
+              </button>
             );
           })}
+        </div>
+
+        <p className="-mt-1 text-sm text-slate-300">{grupo.resumen}</p>
+
+        <div className="mt-2 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          {grupo.proyectos.map((proyecto) => (
+            <TarjetaProyecto
+              key={proyecto.nombre}
+              proyecto={proyecto}
+              onVerImagenes={() => abrirModal(proyecto)}
+            />
+          ))}
         </div>
       </CardContainer>
 
       {modalProyecto && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 p-4 backdrop-blur-sm"
           onClick={cerrarModal}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`Imágenes de ${modalProyecto.nombre}`}
         >
           <div
-            className="w-full max-w-3xl rounded-xl border border-slate-600/70 bg-slate-900 p-4 shadow-2xl"
+            className="w-full max-w-4xl rounded-xl border border-slate-600/70 bg-slate-900 p-4 shadow-2xl"
             onClick={(event) => event.stopPropagation()}
           >
             <div className="flex items-center justify-between gap-4">
@@ -423,7 +687,7 @@ const Proyectos = () => {
               <button
                 type="button"
                 onClick={cerrarModal}
-                className="rounded-md border border-slate-500/70 bg-slate-700/60 px-3 py-1 text-sm text-slate-100 transition-colors hover:border-slate-300"
+                className="cursor-pointer rounded-md border border-slate-500/70 bg-slate-700/60 px-3 py-1 text-sm text-slate-100 transition-colors hover:border-slate-300"
               >
                 Cerrar
               </button>
@@ -444,7 +708,8 @@ const Proyectos = () => {
                         type="button"
                         onClick={imagenAnterior}
                         disabled={imagenActual === 0}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-slate-500/60 bg-slate-700/60 p-2 text-slate-100 transition-all hover:border-cyan-300/90 hover:text-cyan-200 disabled:cursor-not-allowed disabled:border-slate-700/70 disabled:bg-slate-800/70 disabled:text-slate-500"
+                        aria-label="Imagen anterior"
+                        className="absolute left-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-slate-500/60 bg-slate-700/60 p-2 text-slate-100 transition-all hover:border-cyan-300/90 hover:text-cyan-200 disabled:cursor-not-allowed disabled:border-slate-700/70 disabled:bg-slate-800/70 disabled:text-slate-500"
                       >
                         <svg
                           className="h-5 w-5"
@@ -463,7 +728,8 @@ const Proyectos = () => {
                         disabled={
                           imagenActual === modalProyecto.imagenes.length - 1
                         }
-                        className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-slate-500/60 bg-slate-700/60 p-2 text-slate-100 transition-all hover:border-cyan-300/90 hover:text-cyan-200 disabled:cursor-not-allowed disabled:border-slate-700/70 disabled:bg-slate-800/70 disabled:text-slate-500"
+                        aria-label="Imagen siguiente"
+                        className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer rounded-full border border-slate-500/60 bg-slate-700/60 p-2 text-slate-100 transition-all hover:border-cyan-300/90 hover:text-cyan-200 disabled:cursor-not-allowed disabled:border-slate-700/70 disabled:bg-slate-800/70 disabled:text-slate-500"
                       >
                         <svg
                           className="h-5 w-5"
@@ -482,7 +748,7 @@ const Proyectos = () => {
                             key={index}
                             type="button"
                             onClick={() => setImagenActual(index)}
-                            className={`h-2 rounded-full transition-all ${
+                            className={`h-2 cursor-pointer rounded-full transition-all ${
                               index === imagenActual
                                 ? "w-6 bg-cyan-400"
                                 : "w-2 bg-slate-500/60 hover:bg-slate-400"
@@ -500,9 +766,7 @@ const Proyectos = () => {
                 </div>
               ) : (
                 <p className="max-w-md text-center text-sm text-slate-300">
-                  Este proyecto aún no tiene imágenes cargadas. Completa el
-                  arreglo <strong>imágenes</strong> en la lista cuando las
-                  tengas listas.
+                  Este proyecto aún no tiene imágenes cargadas.
                 </p>
               )}
             </div>

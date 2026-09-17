@@ -1,6 +1,7 @@
 // One-off image optimizer: convert raster images to WebP, downscale oversized
 // ones, and remove the originals. Run with: node scripts/optimize-images.mjs
 import { readdir, stat, unlink, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { join, extname, dirname, basename } from "node:path";
 import sharp from "sharp";
 
@@ -15,14 +16,20 @@ const LOOSE = ["public/IMG.png", "public/Logo-AP.png"];
 
 const kb = (n) => `${(n / 1024).toFixed(1)} KB`;
 
+async function walk(dir, files) {
+  for (const entry of await readdir(dir, { withFileTypes: true })) {
+    const path = join(dir, entry.name);
+    if (entry.isDirectory()) await walk(path, files);
+    else if (RASTER.has(extname(entry.name).toLowerCase())) files.push(path);
+  }
+}
+
 async function collect() {
   const files = [];
-  for (const dir of DIRS) {
-    for (const entry of await readdir(dir)) {
-      if (RASTER.has(extname(entry).toLowerCase())) files.push(join(dir, entry));
-    }
+  for (const dir of DIRS) await walk(dir, files);
+  for (const file of LOOSE) {
+    if (existsSync(file)) files.push(file);
   }
-  files.push(...LOOSE);
   return files;
 }
 

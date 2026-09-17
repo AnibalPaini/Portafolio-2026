@@ -3,6 +3,22 @@ import CardContainer from "../UI/CardContainer";
 
 const formacionAcademica = [
   {
+    titulo: "Fundamentos de Networking para Redes IP (CCNA)",
+    institucion: "Udemy",
+    tipo: "Curso",
+    enCurso: true,
+    url: "https://www.udemy.com/course/cisco-fundamentos-de-networking-para-redes-ip-ccna",
+    imagenes: [],
+  },
+  {
+    titulo: "SQL con PostgreSQL",
+    institucion: "DevTalles",
+    tipo: "Curso",
+    enCurso: true,
+    url: "https://cursos.devtalles.com/courses/sql-con-postgres",
+    imagenes: [],
+  },
+  {
     titulo: "Certificado en Reparación de Computadoras",
     institucion: "Formación Técnica",
     tipo: "Certificación",
@@ -70,6 +86,32 @@ const ImageIcon = () => (
   </svg>
 );
 
+const LinkIcon = () => (
+  <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+    <path
+      d="M13.5 6.75h4.875v4.875"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="m10.5 13.5 7.875-7.875"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M19.5 13.5v3A2.25 2.25 0 0 1 17.25 18.75h-9A2.25 2.25 0 0 1 6 16.5v-9A2.25 2.25 0 0 1 8.25 5.25h3"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 const Educacion = () => {
   const [itemActivo, setItemActivo] = useState(null);
 
@@ -101,25 +143,52 @@ const Educacion = () => {
                   </p>
                 </div>
 
-                <span className="rounded-full border border-amber-300/40 bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-200">
-                  {item.tipo}
-                </span>
+                <div className="flex shrink-0 flex-col items-end gap-1">
+                  <span className="rounded-full border border-amber-300/40 bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-200">
+                    {item.tipo}
+                  </span>
+                  {item.enCurso && (
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-400/40 bg-emerald-500/15 px-2 py-0.5 text-xs font-medium text-emerald-200">
+                      <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-300" />
+                      En curso
+                    </span>
+                  )}
+                </div>
               </div>
 
               <div className="mt-auto flex items-center gap-2 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setItemActivo(item)}
-                  aria-label={`Imágenes de ${item.titulo}`}
-                  title={
-                    item.imagenes.length > 0
-                      ? "Ver imágenes"
-                      : "Aún sin imágenes cargadas"
-                  }
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-500/60 bg-slate-700/40 text-slate-100 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/90 hover:text-cyan-200"
-                >
-                  <ImageIcon />
-                </button>
+                {item.imagenes.length > 0 ? (
+                  <button
+                    type="button"
+                    onClick={() => setItemActivo(item)}
+                    aria-label={`Imágenes de ${item.titulo}`}
+                    title="Ver imágenes"
+                    className="inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-md border border-slate-500/60 bg-slate-700/40 text-slate-100 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/90 hover:text-cyan-200"
+                  >
+                    <ImageIcon />
+                  </button>
+                ) : (
+                  <span
+                    aria-label={`Imágenes de ${item.titulo}`}
+                    title="Aún sin imágenes cargadas"
+                    className="inline-flex h-10 w-10 cursor-not-allowed items-center justify-center rounded-md border border-slate-700/70 bg-slate-800/70 text-slate-500"
+                  >
+                    <ImageIcon />
+                  </span>
+                )}
+
+                {item.url && (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Ver el curso ${item.titulo}`}
+                    title="Ver el curso"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-500/60 bg-slate-700/40 text-slate-100 transition-all duration-200 hover:-translate-y-0.5 hover:border-cyan-300/90 hover:text-cyan-200"
+                  >
+                    <LinkIcon />
+                  </a>
+                )}
               </div>
             </article>
           ))}

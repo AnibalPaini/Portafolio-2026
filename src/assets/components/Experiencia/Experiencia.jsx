@@ -14,7 +14,11 @@ const experiencias = [
       "Participación en el desarrollo de soluciones digitales para Libre Deuda y otros trámites municipales.",
     ],
     proyectosRelacionados: [
-      "PodaWeb",
+      "Santa Rosa - Sitio Oficial",
+      "Poda Responsable",
+      "Empleos",
+      "Concejo Deliberante",
+      "Deportes",
       "BoletoWeb",
       "Conoce Tu Capital",
       "Memoria de una foto",
