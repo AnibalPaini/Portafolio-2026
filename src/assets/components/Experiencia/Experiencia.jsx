@@ -3,15 +3,17 @@ import CardContainer from "../UI/CardContainer";
 const experiencias = [
   {
     organizacion: "Municipalidad de Santa Rosa",
-    puesto: "Soporte IT - Desarrollador Web",
+    puesto: "Técnico IT / Soporte · Desarrollador Web desde 2024",
     periodo: "2022 - Actualidad",
     tareas: [
-      "Diseño y desarrollo de aplicaciones web con stack MERN para la gestión de solicitudes municipales, utilizadas por inspectores y áreas administrativas.",
-      "Rediseño del frontend del sistema de pago de impuestos municipales, alineado al manual de marca institucional y orientado a mejorar la experiencia de usuario.",
-      "Soporte técnico a usuarios municipales: gestión de accesos, desbloqueo y reseteo de credenciales, correo electrónico, cuentas de dominio y permisos de red.",
-      "Soporte básico en infraestructura: verificación de conectividad en switches y PCs, configuración y monitoreo de cámaras IP, y control de backups.",
-      "Diseño de formularios web básicos con HTML, CSS y JavaScript para la digitalización de trámites de Obras Particulares.",
-      "Participación en el desarrollo de soluciones digitales para Libre Deuda y otros trámites municipales.",
+      "Desarrollo el sitio municipal santarosa.gob.ar. Participé en la migración de WordPress a Astro y armé el backend de noticias, alertas y documentación. Hoy soy el desarrollador principal.",
+      "Hice el portal de empleos, donde se recibieron más de 2000 CVs en las primeras 48 horas.",
+      "Migré la web del Concejo Deliberante de WordPress a React, con un panel para que las áreas carguen la información sin depender de un desarrollador.",
+      "Armé la sección de Deportes: carga de ligas y categorías con generación automática del fixture y mapa con 44 sedes.",
+      "Desarrollé el sistema de solicitudes de poda, donde el vecino elige un podador habilitado y el técnico aprueba o rechaza cada pedido.",
+      "Migré una aplicación de escritorio hecha en C# a una aplicación web con Node.js y MySQL.",
+      "Rediseñé el frontend del sistema de pago de impuestos municipales, siguiendo el manual de marca institucional.",
+      "Soporte a usuarios internos: cuentas de dominio, accesos y correo. Mantenimiento de red, cámaras IP y control de backups.",
     ],
     proyectosRelacionados: [
       "Santa Rosa - Sitio Oficial",
@@ -29,10 +31,9 @@ const experiencias = [
     puesto: "Soporte Técnico",
     periodo: "2025 - Actualidad",
     tareas: [
-      "Diagnóstico y resolución de problemas en equipos de escritorio y notebooks.",
-      "Instalación y configuración de sistemas operativos y software.",
-      "Mantenimiento preventivo y correctivo de hardware.",
-      "Asistencia a usuarios finales y puesta a punto de equipos.",
+      "Diagnóstico y reparación de PCs y notebooks, tanto de hardware como de software.",
+      "Instalación de sistemas operativos, mantenimiento preventivo y puesta a punto de equipos.",
+      "Atención directa al usuario final.",
     ],
     instagramUrl: "https://www.instagram.com/paini.tech?igsh=dnR0eGVpMXZucHgy",
     instagramLabel: "@paini.tech",
@@ -66,7 +67,7 @@ const Experiencia = () => {
                     {item.puesto}
                   </p>
                 </div>
-                <span className="rounded-full border border-amber-300/40 bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-200">
+                <span className="shrink-0 rounded-full border border-amber-300/40 bg-amber-500/15 px-2 py-0.5 text-xs font-medium text-amber-200">
                   {item.periodo}
                 </span>
               </div>
