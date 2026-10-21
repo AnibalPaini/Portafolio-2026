@@ -236,9 +236,8 @@ const proyectosPersonales = [
       "/proyectos/CanchasYa (8).webp",
       "/proyectos/CanchasYa (9).webp",
     ],
-    gitUrl: null,
-    gitEstado: "Privado",
-    webUrl: "https://canchasya.ar",
+    gitUrl: "https://github.com/AnibalPaini/CanchasYa",
+    webUrl: null,
     estado: null,
   },
   {
